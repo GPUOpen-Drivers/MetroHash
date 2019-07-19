@@ -13,11 +13,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Modifications Copyright© 2019 Advanced Micro Devices, Inc. All rights reserved.
 
 #ifndef METROHASH_PLATFORM_H
 #define METROHASH_PLATFORM_H
 
 #include <stdint.h>
+
+namespace Util
+{
 
 // rotate right idiom recognized by most compilers
 inline static uint64_t rotate_right(uint64_t v, unsigned k)
@@ -46,5 +51,6 @@ inline static uint64_t read_u8 (const void * const ptr)
     return static_cast<uint64_t>(*reinterpret_cast<const uint8_t *>(ptr));
 }
 
+} // Util
 
 #endif // #ifndef METROHASH_PLATFORM_H
