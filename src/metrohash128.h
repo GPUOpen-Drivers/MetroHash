@@ -40,6 +40,13 @@ public:
     // hashing algorithm directly on the argument buffer for speed.
     void Update(const uint8_t * buffer, const uint64_t length);
 
+    // Updates the hash state with the specified object. Modified by Advanced Micro Devices, Inc.
+    template <typename T>
+    void Update(const T& object)
+    {
+        Update(reinterpret_cast<const uint8_t*>(&object), sizeof(object));
+    }
+
     // Constructs the final hash and writes it to the argument buffer.
     // After a hash is finalized, this instance must be Initialized()-ed
     // again or the behavior of Update() and Finalize() is undefined.
