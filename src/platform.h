@@ -20,6 +20,7 @@
 #define METROHASH_PLATFORM_H
 
 #include <stdint.h>
+#include <string.h>
 
 namespace Util
 {
@@ -30,20 +31,25 @@ inline static uint64_t rotate_right(uint64_t v, unsigned k)
     return (v >> k) | (v << (64 - k));
 }
 
-// unaligned reads, fast and safe on Nehalem and later microarchitectures
 inline static uint64_t read_u64(const void * const ptr)
 {
-    return static_cast<uint64_t>(*reinterpret_cast<const uint64_t*>(ptr));
+    uint64_t val;
+    memcpy(&val, ptr, sizeof(val));
+    return val;
 }
 
 inline static uint64_t read_u32(const void * const ptr)
 {
-    return static_cast<uint64_t>(*reinterpret_cast<const uint32_t*>(ptr));
+    uint32_t val;
+    memcpy(&val, ptr, sizeof(val));
+    return static_cast<uint64_t>(val);
 }
 
 inline static uint64_t read_u16(const void * const ptr)
 {
-    return static_cast<uint64_t>(*reinterpret_cast<const uint16_t*>(ptr));
+    uint16_t val;
+    memcpy(&val, ptr, sizeof(val));
+    return static_cast<uint64_t>(val);
 }
 
 inline static uint64_t read_u8 (const void * const ptr)
