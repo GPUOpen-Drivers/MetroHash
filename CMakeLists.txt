@@ -9,6 +9,8 @@ cmake_minimum_required(VERSION 3.1)
 
 project(MetroHash VERSION 1.0.0 LANGUAGES CXX)
 
+option(METROHASH_ENABLE_WERROR "Build with -Werror enabled" OFF)
+
 add_library(metrohash STATIC "")
 
 target_include_directories(metrohash PUBLIC src)
@@ -25,6 +27,10 @@ set_target_properties(metrohash PROPERTIES CXX_STANDARD              11
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 
+    if(METROHASH_ENABLE_WERROR)
+        target_compile_options(metrohash PRIVATE -Werror)
+    endif()
+
     # [GCC] Exceptions
     #   https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_exceptions.html
     #
@@ -39,8 +45,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(metrohash PRIVATE
         -Wall
         -Wextra
-        -Wpedantic
-        -Werror)
+        -Wpedantic)
 
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 
