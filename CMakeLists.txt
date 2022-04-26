@@ -50,13 +50,10 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 
     # [MSVC] Exception Handling Model
-    #    https://msdn.microsoft.com/en-us/library/1deeycx5.aspx
     #
     # [MSVC] Enable Run-Time Type Information
-    #    https://msdn.microsoft.com/en-us/library/we6hfdy0.aspx
     #
     # [MSVC] Buffer Security Check
-    #    https://msdn.microsoft.com/en-us/library/8dbf701c.aspx
     target_compile_options(metrohash PRIVATE
         /EHsc # Catches only C++ exceptions and assumes
               # functions declared as extern "C" never throw a C++ exception.
@@ -64,7 +61,6 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         /GS-) # Disables detection of buffer overruns.
 
     # [MSVC] Warning Level
-    #    https://msdn.microsoft.com/en-us/library/thxezb7y.aspx
     target_compile_options(metrohash PRIVATE
         /W4  # Enable warning level 4.
         /WX) # Treat warnings as errors.
